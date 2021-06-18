@@ -11,29 +11,21 @@
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'src/store/todos/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, onMounted, ref, inject } from '@vue/composition-api';
-import axios, { AxiosResponse } from 'axios';
+import { Database, Meta } from 'src/api/models';
+// import CompositionComponent from 'components/CompositionComponent.vue';
+import { defineComponent, onMounted, ref, inject, readonly } from '@vue/composition-api';
 import store from '../store/index';
 import { ActionTypes, MutationTypes } from '../store/todos/types';
+import { databaseAPI, pageAPI, blockAPI, userAPI } from '../api/api';
+
 
 export default defineComponent({
   name: 'PageIndex',
-  components: { ExampleComponent },
-  setup() {
+  // components: { CompositionComponent },
+  setup() {    
     onMounted(async() => {
-      try {
-        const data: void | AxiosResponse<[]> = await axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-          .then((res: AxiosResponse):[] => res.data.splice(0,10))
-          .then((result: []) => {
-            // store.commit()
-          // todos.value = [...result]
-          })
-      } catch (error) {
-        console.log(error)
-      }
-      ;
+      const database = await databaseAPI.getListDatabases();
+      console.log(database)
     })
     return { todos:[] };
   }

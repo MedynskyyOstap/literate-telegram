@@ -16,7 +16,7 @@
 import {
   defineComponent, PropType, computed, ref, toRef, Ref,
 } from '@vue/composition-api';
-import { Todo, Meta } from '../store/todos/models';
+import { Database, Meta } from '../api/models';
 
 function useClickCount() {
   const clickCount = ref(0);
@@ -28,7 +28,7 @@ function useClickCount() {
   return { clickCount, increment };
 }
 
-function useDisplayTodo(todos: Ref<Todo[]>) {
+function useDisplayTodo(todos: Ref<Database[]>) {
   const todoCount = computed(() => todos.value.length);
   return { todoCount };
 }
@@ -41,11 +41,11 @@ export default defineComponent({
       required: true
     },
     todos: {
-      type: (Array as unknown) as PropType<Todo[]>,
+      type: (Array as unknown) as PropType<Database[]>,
       default: () => []
     },
     meta: {
-      type: (Object as unknown) as PropType<Meta>,
+      type: (Object as unknown) as PropType<Database>,
       required: true
     },
     active: {

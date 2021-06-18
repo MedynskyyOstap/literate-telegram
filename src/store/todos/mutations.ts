@@ -1,15 +1,15 @@
 import { MutationTree } from 'vuex';
 import { State } from './state';
 import { MutationTypes } from './types';
-import { Todo } from './models';
+import { Database } from '../../api/models';
 
 export type Mutations<S = State> = {
-  [MutationTypes.setData](state: S, payload: Todo[]): void;
+  [MutationTypes.setData](state: S, payload: Database[]): void;
 }
 
 const mutations: MutationTree<State> & Mutations = {
-  [MutationTypes.setData] (state: State, payload: []) {
-    state.todos = payload
+  [MutationTypes.setData] (state: State, payload: [Database]) {
+    state.results = payload;
   }
 };
 
